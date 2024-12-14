@@ -1,0 +1,162 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+
+{% block content_profile %}
+    <div class="col-lg-9">
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert text-center alert-{{ msg.tags }}">
+                    {{ msg }}
+
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="section-title mb-4">
+            <div class="row gy-3 align-items-center">
+                <div class="col-sm-8">
+                    <div class="section-title-title">
+                        <h2 class="title-font main-color-two-color h1">ویرایش <span class="text-dark">پروفایل </span>
+                        </h2>
+                        <div class="Dottedsquare"></div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="section-title-link text-sm-end text-start">
+                        <a class="btn main-color-one-bg" href="" data-bs-toggle="modal" data-bs-target="#editModal">ویرایش
+                            <i class="bi bi-pencil-square ms-2"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-custom slider-parent p-0">
+            <div class="table-responsive shadow-box roundedTable p-0">
+                <table class="table main-table rounded-0">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h6 class="fw-bold font-18  text-muted ">نام و نام خانوادگی:</h6>
+                            <p class=" mt-2 font-16">{{ request.user.fullname }}</p>
+                        </td>
+                        <td>
+                            <h6 class="text-muted fw-bold font-18 ">شماره تلفن:</h6>
+                            <p class=" mt-2 font-16">{{ request.user.phone_number }}</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6 class="fw-bold font-18 text-muted">پست الکترونیک:</h6>
+                            <p class=" mt-2 font-16">{{ request.user.email }}</p>
+                        </td>
+                        <td class="no-border">
+                            <h6 class="fw-bold font-18 text-muted">کد ملی:</h6>
+                            <p class=" mt-2 font-16">61400011133322</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="no-border">
+                            <h6 class="fw-bold font-18  text-muted">آدرس: </h6>
+                            <p class=" mt-2 font-16">خرم آباد شهریار انتهای کوچه</p>
+                        </td>
+                        <td colspan="2">
+                            <h6 class="fw-bold font-18 text-muted">جنسیت:</h6>
+                            <p class=" mt-2 font-16">-</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block form %}
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">ویرایش پروفایل</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{% url 'accounts:edit_profile' %}" method="post">
+                        {% csrf_token %}
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="comment-item">
+                                    {{ form.fullname }}
+                                    <label for="floatingInputName" class="form-label label-float fw-bold font-16">نام و
+                                        نام خانوادگی
+                                        <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="comment-item">
+                                    {{ form.email }}
+                                    <label for="floatingInputLName" class="form-label label-float fw-bold">آدرس ایمیل
+                                        <span class="text-danger">*</span></label>
+                                </div>
+                            </div>
+                            {#                            <div class="col-12">#}
+                            {#                                <div class="comment-item">#}
+                            {#                                    <input type="text" class="form-control" id="floatingInputStreet"#}
+                            {#                                           placeholder="نام خانوادگی خود را وارد کنید ...">#}
+                            {#                                    <label for="floatingInputStreet" class="form-label label-float fw-bold">آدرس#}
+                            {#                                        خیابان</label>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="col-md-6">#}
+                            {#                                <div class="comment-item">#}
+                            {#                                    <label for="floatingInputOstan" class="label-float fw-bold">استان <span#}
+                            {#                                            class="text-danger">*</span></label>#}
+                            {##}
+                            {#                                    <select name="" id="floatingInputOstan" class="form-select">#}
+                            {#                                        <option value="">تهران</option>#}
+                            {#                                        <option value="">اصفهان</option>#}
+                            {#                                        <option value="">مشهد</option>#}
+                            {#                                        <option value="">شیراز</option>#}
+                            {#                                    </select>#}
+                            {##}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="col-md-6">#}
+                            {#                                <div class="comment-item">#}
+                            {#                                    <label class="label-float fw-bold" for="floatingInputCity">شهر <span#}
+                            {#                                            class="text-danger">*</span></label>#}
+                            {##}
+                            {#                                    <select name="" id="floatingInputCity" class="form-select">#}
+                            {#                                        <option value="">کرج</option>#}
+                            {#                                        <option value="">خرم آباد</option>#}
+                            {#                                        <option value="">نور آباد</option>#}
+                            {#                                        <option value="">الشتر</option>#}
+                            {#                                    </select>#}
+                            {##}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="col-12">#}
+                            {#                                <div class="comment-item">#}
+                            {#                                    <input type="text" class="form-control" id="floatingInputTel"#}
+                            {#                                           placeholder="شماره تلفن خود را وارد کنید ...">#}
+                            {#                                    <label for="floatingInputTel" class="form-label label-float fw-bold">شماره#}
+                            {#                                        تلفن</label>#}
+                            {#                                </div>#}
+                            {#                            </div>#}
+                            {#                            <div class="col-12">#}
+                            <div class="form-group">
+                                <button type="submit" class="btn main-color-one-bg border-0">
+                                    ویرایش پروفایل
+                                </button>
+                            </div>
+                        </div>
+                </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">بستن</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}

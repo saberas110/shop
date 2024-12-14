@@ -1,0 +1,106 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" dir="rtl" lang="Fa_IR">
+
+<head>
+    {% include 'inc/head_ref.html' %}
+</head>
+
+<body class="bg-auth">
+
+<!-- start content -->
+
+<div class="content vh-100">
+    <div class="container-fluid h-100">
+
+        <div class="auth h-100 d-flex align-items-center">
+            <div class="container-fluid">
+                <div class="auth-items">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="row align-items-center bg-white rounded-3 g-0 shadow-2xl">
+                                <div class="col-lg-6">
+                                    <div class="login-vector bg-white text-center">
+                                        <img src="{% static 'assets/img/login-vector.jpg' %}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="rounded-3 auth-parent py-3 bg-white">
+                                        <div class="auth-logo text-center">
+                                            <a href="">
+                                                <img src="{% static 'assets/img/logo.png' %}" width="200" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="auth-form">
+                                            <div class="auth-form-title mb-4 slider-title-desc-center">
+                                                <h2 class="text-center h4 title-line-bottom-center text-muted title-font">
+                                                    ورود | ثبت ‌نام</h2>
+                                            </div>
+                                             {% if form.errors %}
+                                                {% for msg in form.phone_number.errors %}
+                                                    <div class="alert text-center alert-danger">
+                                                            {{ msg }}
+
+                                                    </div>
+                                                    {% endfor %}
+                                        {% endif %}
+                                            <form action="{% url 'accounts:register' %}" id="form-auth" method="post">
+                                                {% csrf_token %}
+
+                                                <div class="comment-item mt-4 step-username">
+
+                                                    {{ form.phone_number }}
+
+                                                    <label for="username" class="form-label label-float">لطفا شماره
+                                                        موبایل یا ایمیل خود را وارد کنید</label>
+                                                </div>
+
+                                                <div class="comment-item mt-4 position-relative step-passwd">
+                                                    <input type="password" class="form-control" id="passwd">
+                                                    <label for="passwd" class="form-label label-float">رمز عبور خود را
+                                                        وارد
+                                                        کنید</label>
+                                                    <div class="inline-btn-text">
+                                                        <button  type="submit" class="btn border-0 main-color-one-bg">ورود</button>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group step-one mt-4">
+                                                    <button type="button"
+                                                            class="btn main-color-one-bg border-0 w-100 d-block py-3">
+                                                        ورود / ثبت نام
+                                                    </button>
+                                                </div>
+                                                <div class="form-group step-two mt-4">
+                                                    <button
+                                                            class="btn btnForm main-color-one-bg border-0 w-100 d-block py-3">
+                                                        تایید
+                                                    </button>
+                                                </div>
+
+                                            </form>
+
+                                            <p class="loginTermsDesc mt-4">ورود شما به معنای پذیرش<a
+                                                    class="mx-1 inline-block main-color-one-color" href="/page/terms/">شرایط
+                                                راستچین</a>و<a class="mx-1 inline-block main-color-one-color"
+                                                               href="/page/privacy/">قوانین حریم‌خصوصی</a>است</p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- end content -->
+{% include 'inc/foot_ref.html' %}
+</body>
+
+</html>

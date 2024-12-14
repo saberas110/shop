@@ -1,0 +1,61 @@
+<!doctype html>
+<html class="no-js" dir="rtl" lang="Fa_IR">
+
+<head>
+{% include 'inc/head_ref.html' %}
+</head>
+
+<body>
+
+<!-- start header -->
+
+<header class="header">
+{% include 'inc/header.html' %}
+</header>
+
+<!-- end header -->
+
+<!-- start mega menu -->
+
+{% include 'inc/megatab.html' %}
+
+<!-- end mega menu -->
+
+{% block content %}
+
+{% endblock %}
+
+<!-- start footer -->
+
+<footer class="footer">
+    {% include 'inc/footer.html' %}
+</footer>
+
+<!-- end footer -->
+
+<!-- start bottom menu -->
+
+{% include 'inc/mobile_bottom.html' %}
+
+<!-- end bottom menu -->
+
+<!--start cart canvas-->
+
+{% include 'inc/cartcanvas.html' %}
+
+<!--end cart canvas-->
+
+
+<div class="float-btn">
+    <div class="container-fluid">
+        <!-- contact us floating -->
+        <div class=" btn_collapzion" id="btncollapzion"></div>
+        <div class="" id="contactOverlay"></div>
+        <!-- end contact us floating -->
+    </div>
+</div>
+
+{% include 'inc/foot_ref.html' %}
+</body>
+
+</html>

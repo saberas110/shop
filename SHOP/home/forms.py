@@ -1,26 +1,55 @@
 from django import forms
-from .models import AvailableColor
+from .models import AvailableColor, Comment
 
 
-class ProductForm(forms.Form):
-    def __iter__(self):
-        for obj in AvailableColor.objects.all():
-            color1 = forms.ChoiceField(label='ioi', widget=forms.CheckboxInput(attrs={
-                'autocomplete': "off",
-                'class': "btn-check",
-                'id': f'{obj.color.name}',
-                'name': f'{obj.color.name}',
-                'type': "radio"
-            }))
-            yield color1
-        return color1
-
-
-    # color2 = forms.ChoiceField(label='ioi', widget=forms.CheckboxInput(attrs={
-    #     'autocomplete': "off",
-    #     'class': "btn-check",
-    #     'id': "option1",
-    #     'name': "options",
-    #     'type': "radio"
+class CommentForm(forms.Form):
+    # star5 = forms.CharField(widget=forms.TextInput(attrs={
+    #     "id": "star5",
+    #     'name': "rating",
+    #     'type': "radio",
+    #     'value': "5",
     # }))
+    # star4 = forms.CharField(label='', widget=forms.TextInput(attrs={
+    #     "id": "star4",
+    #     'name': "rating",
+    #     'type': "radio",
+    #     'value': "4",
+    # }))
+    # star3 = forms.CharField(label='', widget=forms.TextInput(attrs={
+    #     "id": "star3",
+    #     'name': "rating",
+    #     'type': "radio",
+    #     'value': "3",
+    # }))
+    # star2 = forms.CharField(label='', widget=forms.TextInput(attrs={
+    #     "id": "star2",
+    #     'name': "rating",
+    #     'type': "radio",
+    #     'value': "2",
+    # }))
+    # star1 = forms.CharField(label='', widget=forms.TextInput(attrs={
+    #     "id": "star1",
+    #     'name': "rating",
+    #     'type': "radio",
+    #     'value': "1",
+    # }))
+    text = forms.CharField(widget=forms.Textarea(attrs={
+    'class' :"form-control",
+    'id' : "floatingTextarea2",
+    'placeholder' : "Leave a comment here",
+    'style' : "height: 150px",
+    }))
+    positive_point = forms.CharField(widget=forms.TextInput(attrs={
+    'class' :"commentTags form-control",
+    'id' : "tags-pos",
+    'name' : "tags-pos",
+    'placeholder' : "با کلید اینتر اضافه کنید",
+    }))
+    negative_point = forms.CharField(widget=forms.TextInput(attrs={
+        'class': "commentTags form-control",
+        'id': "tags-neg",
+        'name': "tags-neg",
+        'placeholder': "با کلید اینتر اضافه کنید",
+    }))
+
 

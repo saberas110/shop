@@ -3,6 +3,15 @@ const color_button = document.getElementById('color_button')
 const color_i = document.getElementById('color_i')
 const color = [...document.getElementsByName('color')]
 const uniq_ides=JSON.parse(document.getElementById('index').textContent)
+const comments = JSON.parse(document.getElementById('comments').textContent)
+console.log('comments',comments)
+
+
+
+
+
+
+
 
 function check_color_cart(color, product_id) {
 
@@ -70,4 +79,62 @@ function add_delete_cart(product_id) {
 
         })
     }
+}
+
+
+function like(product_id,comment_id) {
+    const like_class = document.getElementById(`like ${comment_id}`)
+    const like_number = document.getElementById(`like_number ${comment_id}`)
+
+    const dislike_class = document.getElementById(`dislike ${comment_id}`)
+    const dislike_number = document.getElementById(`dislike_number ${comment_id}`)
+
+    $.get(`/product/comment/like/${product_id}/${comment_id}`).then(response =>{
+    if (like_class.className == "bi bi-hand-thumbs-up" && dislike_class.className == "bi bi-hand-thumbs-down") {
+        console.log('start like1')
+        like_number.innerText = Number(like_number.innerText) + 1
+        like_class.className = "bi bi-hand-thumbs-up-fill"
+
+    } else if (like_class.className == "bi bi-hand-thumbs-up" && dislike_class.className == "bi bi-hand-thumbs-down-fill") {
+        console.log('start like2')
+        like_class.className = "bi bi-hand-thumbs-up-fill"
+        like_number.innerText = Number(like_number.innerText) + 1
+        dislike_class.className = "bi bi-hand-thumbs-down"
+        dislike_number.innerText = Number(dislike_number.innerText) - 1
+
+    } else if (like_class.className == "bi bi-hand-thumbs-up-fill") {
+        console.log('start like3')
+        like_number.innerText = Number(like_number.innerText) - 1
+        like_class.className = "bi bi-hand-thumbs-up"
+    }
+})}
+
+function dislike(product_id,comment_id){
+    const like_class = document.getElementById(`like ${comment_id}`)
+    const like_number = document.getElementById(`like_number ${comment_id}`)
+
+    const dislike_class = document.getElementById(`dislike ${comment_id}`)
+    const dislike_number = document.getElementById(`dislike_number ${comment_id}`)
+
+    $.get(`/product/comment/dislike/${product_id}/${comment_id}`).then(response =>{
+
+
+    if (like_class.className == "bi bi-hand-thumbs-up" && dislike_class.className == "bi bi-hand-thumbs-down"){
+console.log('start dislike1')
+        dislike_number.innerText = Number(dislike_number.innerText)+1
+        dislike_class.className = "bi bi-hand-thumbs-down-fill"
+
+    } else if (like_class.className == "bi bi-hand-thumbs-up-fill" && dislike_class.className == "bi bi-hand-thumbs-down") {
+        console.log('start dislike2')
+        like_class.className = "bi bi-hand-thumbs-up"
+        like_number.innerText = Number(like_number.innerText) - 1
+        dislike_class.className = "bi bi-hand-thumbs-down-fill"
+        dislike_number.innerText = Number(dislike_number.innerText) + 1
+
+    } else if (dislike_class.className == "bi bi-hand-thumbs-down-fill" ){
+        console.log('start dislike3')
+           dislike_class.className = "bi bi-hand-thumbs-down"
+        dislike_number.innerText = Number(dislike_number.innerText) - 1
+    }
+})
 }

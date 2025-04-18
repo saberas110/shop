@@ -1,0 +1,220 @@
+{% extends 'base1.html' %}
+{% load static %}
+{% load humanize %}
+
+
+
+{% block content %}
+
+
+<div class="content">
+    <div class="container-fluid">
+
+        <div class="line-step-container d-sm-block d-none">
+            <div class="line-step">
+                <div class="line-step-boxs">
+                    <div class="line-step-box complete">
+                        <a href="">
+                            <p>سبد خرید</p>
+                            <div class="icon">
+                                1
+                            </div>
+                        </a>
+                    </div>
+                    <div class="line-step-box disabled">
+                        <a href="">
+                            <p>جزییات پرداخت</p>
+                            <div class="icon">
+                                2
+                            </div>
+                        </a>
+                    </div>
+                    <div class="line-step-box disabled">
+                        <a href="">
+                            <p>تکمیل سفارش</p>
+                            <div class="icon">
+                                3
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row gy-3">
+            <div class="col-lg-9">
+                <div class="cart-product-item">
+                    <div class="container-fluid">
+
+                        {% for item in cart %}
+<div class="cart-items">
+                            <div class="content-box">
+                                <div class="container-fluid">
+                                    <div class="item">
+                                        <div class="row gy-2">
+                                            <div class="col-md-2 w-100-in-400">
+                                                <div class="image">
+                                                    <img src="{{ item.product.images.first.image.url}}" alt=""
+                                                         class="img-fluid">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-10 w-100-in-400">
+                                                <div class="d-flex justify-content-between align-items-md-start align-items-end flex-wrap">
+                                                    <div class="d-flex align-items-start flex-column me-2">
+                                                        <div class="title d-flex align-items-center flex-wrap">
+                                                            <h6 class="font-16">لپ تاپ 14.2
+                                                                {{ item.product.name}} <span
+                                                                        class="badge ms-2 danger-label rounded-pill">17%</span>
+                                                            </h6>
+                                                        </div>
+
+                                                        <div class="cart-item-feature d-flex align-items-center flex-wrap mt-3">
+                                                            <div class="item d-flex align-items-center">
+                                                                <div class="icon"><i class=""></i></div>
+                                                                <div class="saller-name mx-2">رنگ:</div>
+                                                                <div class="saller-name text-muted">{{ item.color }}</div>
+                                                            </div>
+{#                                                            <div class="item d-flex align-items-center">#}
+{#                                                                <div class="icon"><i class="bi bi-shop"></i></div>#}
+{#                                                                <div class="saller-name mx-2">فروشنده:</div>#}
+{#                                                                <div class="saller-name text-muted">ایران موبایل</div>#}
+{#                                                            </div>#}
+{#                                                            <div class="item d-flex align-items-center ms-2">#}
+{#                                                                <div class="icon"><i class="bi bi-shield-check"></i>#}
+{#                                                                </div>#}
+{#                                                                <div class="saller-name mx-2">گارانتی:</div>#}
+{#                                                                <div class="saller-name text-muted">ایران موبایل</div>#}
+{#                                                            </div>#}
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="action d-flex flex-wrap flex-column justify-content-sm-end justify-content-center align-items-center">
+                                                        <div class="product-box-price flex-column w-100 justify-content-end align-items-end">
+                                                            <div class="product-box-price-discount mb-3">
+{#                                                                <del>2,500,000</del>#}
+                                                            </div>
+                                                            <div class="product-box-price-price d-flex">
+                                                                <h5 class="f-800 main-color-green-color h2 mb-2">
+                                                                    {{ item.product.price|intcomma}}</h5>
+                                                                <p class="mb-0 font-12 ms-1 ">تومان</p>
+
+                                                                <div class="remove ms-3">
+                                                                    <a href="" class="text-danger">
+                                                                        <i class="bi bi-trash-fill"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="counter">
+                                                                <input type="text" name="count" class="counter"
+                                                                       value={{ item.quantity }}>
+                                                            </div>
+
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+
+
+                    </div>
+                </div>
+                <div class="show-discount-modal pointer py-3 mb-3" data-bs-toggle="modal" data-bs-target="#discountModal">
+                    <i class="bi bi-patch-exclamation main-color-one-color me-2" style="font-size: 40px;"></i>
+                    کوپن تخفیف دارید برای نوشتن کد اینجا کلیک
+                    کنید
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="cart__order-total">
+                    <div class="box__shaped-title">
+                        <svg width="230" height="75" viewBox="0 0 230 75" fill="none">
+                            <path d="M230 0H0V10C26.2258 10.6605 43.6909 20.4901 52.0499 27.9356C60.4088 35.3811 84.5186 61.9259 84.5186 61.9259C101.038 79.219 128.627 79.219 145.146 61.9259C145.146 61.9259 169.146 35.4578 177.549 28.0042C185.953 20.5506 203.675 10.6625 230 10V0Z"
+                                  fill="#f4f4f4"></path>
+                            <defs>
+                                <linearGradient id="paint0_linear" x1="115" y1="0" x2="115" y2="74.8957"
+                                                gradientUnits="userSpaceOnUse">
+                                    <stop stop-color="#FAFBFB"></stop>
+                                    <stop offset="1" stop-color="#F4F6F8"></stop>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="box__shaped-title__icon"></div>
+                    </div>
+                    <div class="cart__order-total-row">
+                        <label class="order-total-row__col-right">جمع مبلغ کالاها:</label>
+                        <div class="order-total-row__col-left"><span>{{ cart.total_price|intcomma }}</span><span class="font-12 ms-1">تومان</span></div>
+                    </div>
+{#                    <div class="cart__order-total-row cart__order-total-row--benefit">#}
+{#                        <div class="order-total-row__col-right">سود شما از خرید :</div>#}
+{#                        <div class="order-total-row__col-left">#}
+{#                            <span>138,000</span><span class="font-12 ms-1">تومان</span>#}
+{#                        </div>#}
+{#                    </div>#}
+                    <div class="cart__order-total-box">
+                        <div class="cart__order-total-row cart__order-total-row--text">هزینه ارسال در ادامه بر اساس آدرس
+                            و نحوه‌ی ارسال محاسبه و اضافه خواهد شد
+                        </div>
+                        <div class="cart__order-total-row cart__order-total-row--total"><label
+                                class="order-total-row__col-right">جمع سبد خرید :</label>
+                            <div class="order-total-row__col-left">
+                                <span>{{ cart.total_price|intcomma}}</span><span class="font-12 ms-1">تومان</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a href="{% url 'orders:order_create' %}" class="btn w-100 d-block main-color-green py-3">تکمیل فرایند خرید</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="discount-modal">
+    <div class="modal fade" id="discountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel">کد تخفیف</h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h4 class="font-16 mb-3">
+                        اگر شما کد تخفیف دارید ، برای ثبت آن از طریق زیر اقدام کنید.
+                    </h4>
+                    <form action="">
+                        <div class="form-group">
+                            <label for="discount" class="form-label">کد تخفیف:</label>
+                            <input type="text" class="form-control" placeholder="برای مثال eyd1402"
+                                   id="discount">
+                        </div>
+                        <button class="btn main-color-two-bg border-0 rounded-0">ثبت کد
+                            تخفیف</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+<script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+<script src="assets/js/vendor/bootstrap.bundle-5.3.2.min.js"></script>
+<script src="assets/js/plugin/swiper/swiper-bundle.min.js"></script>
+<script src="assets/js/plugin/countdown/countdown.js"></script>
+<script src="assets/js/plugin/rasta-contact/script.js"></script>
+<script src="assets/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="assets/js/plugins.js"></script>
+<script src="assets/js/main.js"></script>
+

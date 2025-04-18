@@ -138,3 +138,46 @@ console.log('start dislike1')
     }
 })
 }
+
+function favorite_add_remove(product_id){
+    $.get(`/product/favorites/add/${product_id}`).then(response =>{
+
+        const favorite_button = document.getElementById('favorite')
+        if (favorite_button.className == "bi bi-heart fs-4"){
+            favorite_button.className = "bi bi-heart-fill fs-4"
+        }else {
+            favorite_button.className = "bi bi-heart fs-4"
+        }
+    })
+}
+
+
+function delete_favorite_inlist(product_id){
+        $.get(`/product/favorites/add/${product_id}`).then(response =>{
+        const div_favorite_list = document.getElementById(`delete-favorite ${product_id}`)
+            div_favorite_list.remove()
+
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

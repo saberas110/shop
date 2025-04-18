@@ -4,7 +4,7 @@ from django.contrib.admin.utils import label_for_field
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.core.exceptions import ValidationError
 
-from .models import User, Otp
+from .models import User, Otp, Address
 from django import forms
 
 
@@ -138,3 +138,36 @@ class SetPasswordForm(forms.Form):
             raise ValidationError('پسورد حداقل باید ۸ کاراکتر باشد')
         return cd['password2']
 
+
+class AddressForm(forms.ModelForm):
+    class Meta:
+        model = Address
+        fields = ('__all__')
+        widgets = {
+            'address': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'floatingInputStreet1',
+                'style': 'max-width:95%;height:200px',
+                'placeholder': 'ادرس خود را وارد کنید'
+            }),
+            'phone': forms.TextInput(attrs={
+                'class': 'form-control',
+                'style': 'max-width:40%',
+                'placeholder': 'شماره تماس خود را وارد کنید'
+
+            }),
+            'province': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': "floatingInputOstan1",
+                'style': 'max-width:40%',
+                'placeholder': 'نام استان  خود را وارد کنید'
+            }),
+            'city': forms.TextInput(attrs={
+                'class': 'form-control',
+                'id': 'floatingInputCity1',
+                'style': 'max-width:40%',
+                'placeholder': 'نام شهر خود را وارد کنید'
+            }),
+
+
+        }

@@ -36,3 +36,12 @@ class Otp(models.Model):
 
     def __str__(self):
         return f'{self.username}-{self.code},  {self.created}'
+
+class Address(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='addresses')
+    address = models.CharField(max_length=300)
+    province = models.CharField(max_length=50)
+    city = models.CharField(max_length=50)
+    phone = models.CharField(max_length=11)
+    def __str__(self):
+        return f'{self.user.phone_number} - {self.address[:15]}'

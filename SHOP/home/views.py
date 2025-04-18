@@ -1,16 +1,17 @@
-from itertools import product
 from syslog import LOG_INFO
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.template.defaultfilters import length
 from orders.cart import Cart
 from django.shortcuts import render,get_object_or_404, redirect
 from django.views import View
-from .models import Product, Comment, LikeDislikeComment
+from .models import Product, Comment, LikeDislikeComment,FavoriteProduct
 from .forms import CommentForm
 from django.contrib import messages
 
 
+
 class HomeView(View):
+
     def get(self, request):
         return render(request, 'home/home.html')
 
@@ -22,19 +23,20 @@ class DetailProductView(LoginRequiredMixin,View):
         return super().setup(args, kwargs)
 
     def get(self,request, **kwargs):
-        cart = Cart(request)
-        # for item in cart.cart.values():
-        #     print('carts',item['product'])
+        is_favorite = False
         is_cart = False
+        cart = Cart(request)
         colors = self.product.availables.all()
         last_color = colors.last().color
         comments = self.product.comments.all()
+        if FavoriteProduct.objects.filter(product_id=self.product_id, user_id=request.user.id).exists():
+            is_favorite = True
         if request.session.get('cart'):
             if request.session.get('cart').get(cart.generator_uniq_id(self.product_id, last_color)):
                 is_cart = True
         return render(request, 'home/detail_product.html',
                       {'product':self.product,'colors':colors,'is_cart':is_cart,
-                       'form':self.form_class,'comments':comments})
+                       'form':self.form_class,'comments':comments, 'is_favorite':is_favorite})
 
     def post(self,request,**kwargs):
         form = self.form_class(request.POST)
@@ -49,7 +51,7 @@ class DetailProductView(LoginRequiredMixin,View):
         return redirect('home:detail_product', self.product_id)
 
 
-class LikeCommentView(View):
+class LikeCommentView(LoginRequiredMixin,View):
     def get(self,request, product_id, comment_id):
 
         try:
@@ -67,7 +69,7 @@ class LikeCommentView(View):
         return redirect('home:detail_product',product_id)
 
 
-class DisLikeCommentView(View):
+class DisLikeCommentView(LoginRequiredMixin,View):
     def get(self,request, product_id, comment_id):
 
         try:
@@ -82,6 +84,25 @@ class DisLikeCommentView(View):
             except LikeDislikeComment.DoesNotExist:
                 LikeDislikeComment.objects.create(comment_id=comment_id, user_id=request.user.id, dislike=True)
         return redirect('home:detail_product',  product_id)
+
+
+
+class FavoritesProductView(LoginRequiredMixin,View):
+    def get(self, request, product_id=None):
+        if product_id:
+            try:
+                favorite=FavoriteProduct.objects.get(product_id=product_id, user=request.user)
+                print('fav', favorite)
+                favorite.delete()
+                return redirect('home:favorites')
+            except FavoriteProduct.DoesNotExist:
+                FavoriteProduct.objects.create(product_id=product_id, user_id=request.user.id)
+                return redirect('home:favorites')
+
+        else:
+            favorites=FavoriteProduct.objects.all()
+            return render(request, 'home/favorites.html', {'favorites':favorites,
+                                                           'is_active_favorites':'active'})
 
 
 

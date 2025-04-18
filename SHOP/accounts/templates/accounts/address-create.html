@@ -1,0 +1,70 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+
+{% block content_profile %}
+	<div class="col-lg-9">
+
+               <div class="section-title mb-4">
+                   <div class="section-title-title">
+                       <h2 class="title-font main-color-two-color h1">ثبت <span class="text-dark">آدرس</span>
+                       </h2>
+                       <div class="Dottedsquare"></div>
+                   </div>
+               </div>
+
+               <div class="slider-parent content-box rounded-3">
+                   <div class="container-fluid">
+                       <form action="">
+                           <div class="row g-4">
+                               <div class="col-12">
+                                   <div class="comment-item mb-3">
+                                       <input type="text" class="form-control" id="floatingInputStreet1" placeholder="نام خانوادگی خود را وارد کنید ...">
+                                       <label for="floatingInputStreet1" class="form-label label-float fw-bold">آدرس
+                                           خیابان</label>
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="comment-item" for="floatingInputOstan1">
+                                       <label class="label-float fw-bold">استان <span class="text-danger">*</span></label>
+
+                                       <select name="" id="floatingInputOstan1" class="form-select">
+                                           <option value="">تهران</option>
+                                           <option value="">اصفهان</option>
+                                           <option value="">مشهد</option>
+                                           <option value="">شیراز</option>
+                                       </select>
+
+                                   </div>
+                               </div>
+                               <div class="col-md-6">
+                                   <div class="comment-item">
+                                       <label class="label-float fw-bold" for="floatingInputCity1">شهر <span class="text-danger">*</span></label>
+
+                                       <select name="" id="floatingInputCity1" class="form-select">
+                                           <option value="">کرج</option>
+                                           <option value="">خرم آباد</option>
+                                           <option value="">نور آباد</option>
+                                           <option value="">الشتر</option>
+                                       </select>
+
+                                   </div>
+                               </div>
+                               <div class="col-12">
+                                   <div class="comment-item mb-3">
+                                       <textarea class="form-control py-3" id="floatingInputDesc" rows="5" placeholder="اگر سفارش شما توضیح خاصی دارد اینجا وارد کنید"></textarea>
+                                       <label for="floatingInputDesc" class="form-label label-float fw-bold">توضیحات
+                                           سفارش</label>
+                                   </div>
+                               </div>
+
+                               <div class="col-12">
+                                   <button type="submit" class="btn main-color-one-bg px-3 py-2">ثبت آدرس</button>
+                               </div>
+
+                           </div>
+                       </form>
+                   </div>
+               </div>
+
+           </div>
+{% endblock %}

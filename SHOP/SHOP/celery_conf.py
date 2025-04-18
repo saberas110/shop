@@ -8,8 +8,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'SHOP.settings')
 celery_app = Celery('SHOP')
 celery_app.autodiscover_tasks()
 
-celery_app.conf.broker_url = 'amqp://saber:saber@localhost:5672'
-celery_app.conf.result_backend = 'rpc://'
+celery_app.conf.broker_url = 'redis://redis:6379/0'
+celery_app.conf.result_backend = 'redis://redis:6379/0'
 celery_app.conf.task_serializer = 'json'
 celery_app.conf.result_serializer = 'pickle'
 celery_app.conf.accept_content = ['json', 'pickle']

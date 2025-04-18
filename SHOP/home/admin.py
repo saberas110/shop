@@ -1,7 +1,7 @@
 
 from django.contrib import admin
 
-from home.models import Product, Color, AvailableColor, ImagesProduct, Comment, LikeDislikeComment
+from home.models import Product, Color, AvailableColor, ImagesProduct, Comment, LikeDislikeComment,FavoriteProduct
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -22,4 +22,5 @@ admin.site.register(LikeDislikeComment, LikeDislikeAdmin)
 admin.site.register(ImagesProduct)
 admin.site.register(Color)
 admin.site.register(Comment)
+admin.site.register(FavoriteProduct)
 admin.site.register(AvailableColor,AvailableColorAdmin)

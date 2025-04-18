@@ -39,7 +39,7 @@ class Cart:
         self.save()
 
 
-    def total_price(self):
+    def total_price(self, discount=None):
         total_price = sum(item['total_price'] for item in self.cart.values())
         return total_price
 

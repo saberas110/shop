@@ -303,10 +303,10 @@
 
 
                     {% else %}
-                        <a href="" class="top-header-link-register border-0 btn main-color-one-bg rounded-pill"><i
+                        <a href="{% url 'accounts:register' %}" class="top-header-link-register border-0 btn main-color-one-bg rounded-pill"><i
                                 class="bi bi-person-add fs-2 d-sm-none d-sm-block"></i> <span class="d-sm-block d-none">عضویت</span>
                         </a>
-                        <a href="" class="top-header-link-login rounded-pill me-2"><i
+                        <a href="{% url 'accounts:register' %}" class="top-header-link-login rounded-pill me-2"><i
                                 class="bi bi-person-lock d-sm-none fs-2 d-sm-block"></i> <span
                                 class="d-sm-block d-none">ورود</span></a>
                     {% endif %}

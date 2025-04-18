@@ -23,13 +23,23 @@
                                 <ins class="font-25">{{ item.total_price| intcomma}} <span>تومان</span></ins>
                             </div>
                             <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
-                                <div class="cart-canvas-count">
-                                    <span>تعداد:</span>
+                                <div class="cart-canvas-count" >
+                                    <span >تعداد:</span>
                                     <span class="fw-bold">{{ item.quantity }}</span>
+
                                 </div>
+
                                 <div class="cart-canvas-delete">
                                     <a href="" class="btn"><i class="bi bi-x"></i></a>
                                 </div>
+                            </div>
+                            <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
+
+                                <div class="cart-canvas-count" >
+                                <span  >رنگ:  </span>
+                                    <span style="color: {{ item.color }}" class="fw-bold">{{ item.color }}</span>
+                                     </div>
+
                             </div>
                         </div>
                     </div>

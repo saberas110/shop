@@ -1,0 +1,69 @@
+{% extends 'base_profile.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content_profile %}
+    <div class="col-lg-9">
+
+        <div class="section-title mb-4">
+            <div class="section-title-title">
+                <h2 class="title-font main-color-two-color h1">محصولات <span class="text-dark">مورد علاقه </span>
+                </h2>
+                <div class="Dottedsquare"></div>
+            </div>
+        </div>
+
+        <div class="content-box">
+            <div class="container-fluid">
+                <ul class="row gy-3 ps-0">
+
+                    {% for item in favorites %}
+                        <div id="delete-favorite {{ item.product.id }}" class="col-sm-6">
+                            <div class="cart-canvas border rounded-3 p-3">
+                                <div class="row align-items-center">
+                                    <div class="col-4 ps-0">
+                                        <img src="{{ item.product.images.first.image.url}}" width="200" alt="">
+                                    </div>
+                                    <div class="col-8">
+                                        <h3 class="text-overflow-2 font-16">{{ item.product.name }}
+                                        </h3>
+                                        <div class="product-box-suggest-price my-2  d-flex align-items-center justify-content-between">
+                                            <ins class="font-25 ms-0">{{ item.product.price|intcomma}} <span>تومان</span></ins>
+                                        </div>
+                                        <div class="cart-canvas-foot d-flex align-items-center justify-content-between">
+                                            <div onclick="delete_favorite_inlist('{{ item.product.id }}')" class="cart-canvas-delete">
+                                                <a  class="btn"><i  class="bi bi-x"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </ul>
+                <div class="pagination mt-5 pagination-2 justify-content-center">
+                    <a href="#" class="pageitem">قبلی</a>
+                    <a href="#">1</a>
+                    <a href="#" class="active">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                    <a href="#" class="pageitem">بعدی</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+<script src="assets/js/vendor/modernizr-3.11.2.min.js"></script>
+<script src="assets/js/vendor/jquery-3.7.1.min.js"></script>
+<script src="assets/js/vendor/bootstrap.bundle-5.3.2.min.js"></script>
+<script src="assets/js/plugin/swiper/swiper-bundle.min.js"></script>
+<script src="assets/js/plugin/countdown/countdown.js"></script>
+<script src="assets/js/plugin/rasta-contact/script.js"></script>
+<script src="assets/js/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="assets/js/plugins.js"></script>
+<script src="assets/js/main.js"></script>

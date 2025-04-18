@@ -13,8 +13,8 @@ from django.shortcuts import render, redirect
 from django.views import View
 from random import randint
 
-from accounts.forms import UserRegisterForm, OtpForm, EditProfileForm, SetPasswordForm
-from accounts.models import Otp, User
+from accounts.forms import UserRegisterForm, OtpForm, EditProfileForm, SetPasswordForm, AddressForm
+from accounts.models import Otp, User, Address
 
 
 class UserRegisterView(View):
@@ -118,3 +118,20 @@ class SetOrChangePasswordView(LoginRequiredMixin, View):
             return redirect('accounts:edit_profile')
         return render(request, 'accounts/change-password.html',
                       {'form': form, 'is_active_password': self.is_active})
+
+class AddressView(LoginRequiredMixin,View):
+    def dispatch(self, request, *args, **kwargs):
+        if Address.objects.filter(user=request.user):
+            return super().dispatch(*args, **kwargs)
+        return redirect('accounts:add_address')
+    def get(self, request):
+        return render(request, 'accounts/delivery-address.html')
+
+class AddressAddView(View):
+    def get(self, request):
+        return render(request, 'accounts/address-create.html')
+    form_class = AddressForm
+    def post(self, request):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            return render(request, 'accounts/address-create.html')

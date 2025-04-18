@@ -1,0 +1,38 @@
+{% extends 'base1.html' %}
+{% load static %}
+
+{% block content %}
+	<div class="bread-crumb py-4">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb" class="my-lg-0 my-2">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="font-14 text-muted-two" href="#">خانه</a></li>
+                <li class="breadcrumb-item"><a class="font-14 text-muted-two" href="#">فروشگاه</a></li>
+                <li class="breadcrumb-item"><a class="font-14 text-muted-two" href="#">گوشی هوشمند</a></li>
+                <li aria-current="page" class="breadcrumb-item active main-color-one-color font-14 fw-bold">گوشی شیائومی
+                </li>
+            </ol>
+        </nav>
+    </div>
+</div>
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="content-box">
+            <div class="container-fluid">
+                <div class="order-list--empty">
+                    <img src="assets/img/empty-cart.svg" width="500" alt="">
+                    <p class="order-list__empty-text">سبد خرید شما خالی است!</p>
+                    <a href="" class="btn main-color-one-outline border-2 mt-3 px-4 py-2">رفتن به فروشگاه</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+

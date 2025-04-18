@@ -47,4 +47,8 @@ def percentage_star(product_id,number_star):
     print('le',length_star_number)
     return int(length_star_number/length_all_star *100)
 
+@register.filter
+def length_favorites(request):
+    return length(request.user.favorites.all())
+
 

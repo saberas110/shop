@@ -1,0 +1,73 @@
+
+services:
+  web:
+    build:
+      network: host
+      context: .
+    command: gunicorn SHOP.wsgi:application --bind 0.0.0.0:8000
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+      - redis
+    environment:
+      - DEBUG=1
+      - DB_NAME=shop
+      - DB_USER=saber
+      - DB_PASSWORD=saber
+      - DB_HOST=db
+      - DB_PORT=5432
+
+  db:
+    image: postgres:15
+    environment:
+       POSTGRES_DB: shop
+       POSTGRES_USER: saber
+       POSTGRES_PASSWORD: saber
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  celery:
+    build: .
+    command: celery -A SHOP worker --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
+      - rabbitmq
+    env_file:
+      - .env
+
+  celery-beat:
+    build: .
+    command: celery -A SHOP beat --loglevel=info
+    volumes:
+      - .:/app
+    depends_on:
+      - redis
+      - db
+      - rabbitmq
+    env_file:
+      - .env
+volumes:
+  postgres_data:
+
+
+
+
+

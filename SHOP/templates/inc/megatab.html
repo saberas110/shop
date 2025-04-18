@@ -1,4 +1,5 @@
 {% load static %}
+{% load myfilters %}
 <div class="mega-menu menu mega-menu-top d-lg-block d-none">
     <div class="container-fluid">
         <div class="top-menu-parent">
@@ -248,13 +249,15 @@
                             </div>
                         </div>
                         <div class="d-flex align-items-center justify-content-end ms-5">
-                            <a href="" class="btn-favorite-items highlight">
+                            <a href="{% url 'home:favorites' %}" class="btn-favorite-items highlight">
                                 <i class="bi bi-heart"></i>
-                                <span>35</span>
+                                {% if request.user.is_authenticated %}
+                                <span>{{ request|length_favorites }}</span>
+                                {% endif %}
                             </a>
                             <a class="btn-cart-counter ms-2" data-bs-toggle="offcanvas" href="#offcanvasCart" role="button"
                                aria-controls="offcanvasCart">
-                                <span class="text-white me-3">2</span>
+                                <span class="text-white me-3">{{ cart|length }}</span>
                                 <i class="bi bi-basket"></i>
                             </a>
                         </div>
